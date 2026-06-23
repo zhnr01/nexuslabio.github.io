@@ -834,6 +834,64 @@
 
   .footer-link:hover { color: var(--white); }
 
+  /* WHATSAPP BUTTON */
+  .whatsapp-float {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 60px;
+    height: 60px;
+    background: #25D366;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    cursor: pointer;
+    z-index: 999;
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-decoration: none;
+  }
+
+  .whatsapp-float:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+  }
+
+  .whatsapp-float svg {
+    width: 32px;
+    height: 32px;
+    fill: white;
+  }
+
+  .whatsapp-tooltip {
+    position: absolute;
+    right: 70px;
+    background: var(--slate-800);
+    color: var(--white);
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+    font-family: var(--font-body);
+  }
+
+  .whatsapp-float:hover .whatsapp-tooltip {
+    opacity: 1;
+  }
+
+  @media (max-width: 600px) {
+    .whatsapp-float {
+      bottom: 16px;
+      right: 16px;
+      width: 56px;
+      height: 56px;
+    }
+  }
+
   /* RESPONSIVE */
   @media (max-width: 900px) {
     .why-inner { grid-template-columns: 1fr; }
@@ -969,90 +1027,84 @@
   </div>
 </section>
 
-<!-- TRUSTED BY -->
+<!-- BUILT WITH -->
 <section class="trusted">
-  <p class="trusted-label">Trusted by companies across industries</p>
+  <p class="trusted-label">Built with</p>
   <div class="trusted-logos">
-    <div class="trusted-logo">TechFlow</div>
-    <div class="trusted-logo">DataCore</div>
-    <div class="trusted-logo">GrowthLabs</div>
-    <div class="trusted-logo">Nexient</div>
-    <div class="trusted-logo">PrimeRealty</div>
-    <div class="trusted-logo">CloudVista</div>
+    <div class="trusted-logo">Python</div>
+    <div class="trusted-logo">FastAPI</div>
+    <div class="trusted-logo">React</div>
+    <div class="trusted-logo">MongoDB</div>
+    <div class="trusted-logo">Apify</div>
+    <div class="trusted-logo">Node.js</div>
+    <div class="trusted-logo">Docker</div>
+    <div class="trusted-logo">Stripe</div>
   </div>
 </section>
 
 <!-- RESULTS -->
 <section class="results">
   <div style="text-align: center; max-width: 700px; margin: 0 auto;">
-    <p class="section-label">Proven Results</p>
-    <h2 class="section-title">Real projects.<br>Real impact.</h2>
-    <p class="section-sub" style="margin: 0 auto;">Numbers from actual client projects. No inflated metrics, no hypotheticals.</p>
+    <p class="section-label">How we work</p>
+    <h2 class="section-title">Clear commitments.<br>No invented metrics.</h2>
+    <p class="section-sub" style="margin: 0 auto;">What you can actually expect when you work with us.</p>
   </div>
   <div class="results-grid">
     <div class="result-card">
-      <span class="result-metric">2,400+</span>
-      <span class="result-label">Real Estate Leads Delivered</span>
-      <p class="result-description">Scraped and verified investor-ready property listings across 12 markets in 48 hours.</p>
+      <span class="result-metric">24hrs</span>
+      <span class="result-label">Lead list delivery time</span>
+      <p class="result-description">From brief to clean CSV in your inbox. This is our standard timeline.</p>
     </div>
     <div class="result-card">
-      <span class="result-metric">94%</span>
-      <span class="result-label">Data Accuracy Rate</span>
-      <p class="result-description">Email verification, phone validation, and duplicate removal on every list we deliver.</p>
+      <span class="result-metric">100%</span>
+      <span class="result-label">Direct founder access</span>
+      <p class="result-description">You talk to the person building your project. Every time.</p>
     </div>
     <div class="result-card">
-      <span class="result-metric">< 24hr</span>
-      <span class="result-label">Average Delivery Time</span>
-      <p class="result-description">From brief to clean CSV in your inbox. Most projects complete same-day.</p>
+      <span class="result-metric">48hrs</span>
+      <span class="result-label">Software MVP scoping</span>
+      <p class="result-description">Clear scope, timeline, and price within two business days of your brief.</p>
     </div>
     <div class="result-card">
-      <span class="result-metric">15+</span>
-      <span class="result-label">Industries Served</span>
-      <p class="result-description">SaaS, real estate, e-commerce, agencies, consulting, healthcare, and more.</p>
+      <span class="result-metric">0</span>
+      <span class="result-label">Account managers between you and us</span>
+      <p class="result-description">No middlemen. No translations. Direct communication with the builder.</p>
     </div>
   </div>
 </section>
 
-<!-- TESTIMONIALS -->
+<!-- WHY CLIENTS CHOOSE US -->
 <section class="testimonials">
   <div class="testimonials-header">
-    <p class="section-label">Client Feedback</p>
-    <h2 class="section-title">What clients say</h2>
-    <p class="section-sub" style="margin: 0 auto;">Real feedback from real projects.</p>
+    <h2 class="section-title">Why clients choose<br>a builder over an agency</h2>
   </div>
   <div class="testimonials-grid">
     <div class="testimonial-card">
-      <div class="testimonial-stars">★★★★★</div>
-      <p class="testimonial-text">"Needed 500 verified dentist leads in NYC. Got 487 records in 23 hours with phone, email, and Google ratings. Clean data, zero fluff. Exactly what was promised."</p>
-      <div class="testimonial-author">
-        <div class="testimonial-avatar">MK</div>
-        <div class="testimonial-details">
-          <div class="testimonial-name">Michael K.</div>
-          <div class="testimonial-role">Marketing Director, Healthcare SaaS</div>
-        </div>
-      </div>
+      <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-bottom: 1.5rem;">
+        <circle cx="24" cy="24" r="20" stroke="#10B981" stroke-width="2" fill="none"/>
+        <path d="M24 8v16l8 8" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <h3 style="font-family: var(--font-display); font-size: 1.25rem; font-weight: 600; color: var(--white); margin-bottom: 1rem;">2-hour response time</h3>
+      <p class="testimonial-text">Every message gets a reply within 2 hours during business hours. No account managers, no handoffs. You talk directly to the person doing the work.</p>
     </div>
     <div class="testimonial-card">
-      <div class="testimonial-stars">★★★★★</div>
-      <p class="testimonial-text">"Built us a custom dashboard to monitor competitor pricing across 200+ products. Updates every 6 hours. Game-changer for our pricing strategy."</p>
-      <div class="testimonial-author">
-        <div class="testimonial-avatar">SP</div>
-        <div class="testimonial-details">
-          <div class="testimonial-name">Sarah P.</div>
-          <div class="testimonial-role">Founder, E-commerce Brand</div>
-        </div>
-      </div>
+      <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-bottom: 1.5rem;">
+        <path d="M24 4L6 12v12c0 11 6 21 18 24 12-3 18-13 18-24V12L24 4z" stroke="#10B981" stroke-width="2" fill="none" stroke-linejoin="round"/>
+        <path d="M18 24l4 4 8-8" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <h3 style="font-family: var(--font-display); font-size: 1.25rem; font-weight: 600; color: var(--white); margin-bottom: 1rem;">No inflated case studies</h3>
+      <p class="testimonial-text">New agency. Honest pricing. Real delivery. We'd rather earn your trust with results than impress you with numbers we made up.</p>
     </div>
     <div class="testimonial-card">
-      <div class="testimonial-stars">★★★★★</div>
-      <p class="testimonial-text">"No back-and-forth. No scope creep. Just a clean lead list delivered when promised. Refreshing to work with someone who just executes."</p>
-      <div class="testimonial-author">
-        <div class="testimonial-avatar">DJ</div>
-        <div class="testimonial-details">
-          <div class="testimonial-name">David J.</div>
-          <div class="testimonial-role">Growth Lead, B2B Agency</div>
-        </div>
-      </div>
+      <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-bottom: 1.5rem;">
+        <path d="M8 24C8 15.163 15.163 8 24 8s16 7.163 16 16-7.163 16-16 16" stroke="#10B981" stroke-width="2" stroke-linecap="round"/>
+        <path d="M8 24c0 8.837 7.163 16 16 16" stroke="#10B981" stroke-width="2" stroke-linecap="round">
+          <animate attributeName="stroke-dasharray" from="0,100" to="50,0" dur="2s" repeatCount="indefinite"/>
+        </path>
+        <circle cx="24" cy="8" r="2" fill="#10B981"/>
+      </svg>
+      <h3 style="font-family: var(--font-display); font-size: 1.25rem; font-weight: 600; color: var(--white); margin-bottom: 1rem;">First client offer</h3>
+      <p class="testimonial-text">Be one of our first 10 clients and get 20% off your first order. We want the testimonials we haven't earned yet — and we'll earn them.</p>
     </div>
   </div>
 </section>
@@ -1200,14 +1252,14 @@
     <h2 class="section-title">Ready to get<br>the data you need?</h2>
     <p class="section-sub">Tell us what you need: data, software, or both. We'll tell you what we can do and what it costs. No pitch decks, no discovery calls that go nowhere.</p>
     <br>
-    <a href="mailto:contact@nexuslabio.tech" class="contact-email">
-      <span class="contact-email-icon"></span>
-      contact@nexuslabio.tech
-    </a>
-    <br><br>
-    <a href="mailto:contact@nexuslabio.tech" class="btn-primary">Send us a message →</a>
+    <p style="font-family: var(--font-mono); font-size: 0.9rem; color: var(--slate-400); margin-bottom: 2rem;">Or email us directly: contact@nexuslabio.tech</p>
+    <iframe data-tally-src="https://tally.so/embed/wgdx9Q?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" loading="lazy" width="100%" height="400" frameborder="0" marginheight="0" marginwidth="0" title="Contact NexusLab"></iframe>
   </div>
 </section>
+
+<script>
+var d=document,w="https://tally.so/widgets/embed.js",v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds():d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((function(e){e.src=e.dataset.tallySrc}))};if("undefined"!=typeof Tally)v();else if(d.querySelector('script[src="'+w+'"]')==null){var s=d.createElement("script");s.src=w;s.onload=v;s.onerror=v;d.body.appendChild(s);}
+</script>
 
 <!-- FOOTER -->
 <footer>
@@ -1218,6 +1270,7 @@
   <div class="footer-right">
     <a href="#services" class="footer-link">Services</a>
     <a href="#process" class="footer-link">Process</a>
+    <a href="/privacy.html" class="footer-link">Privacy Policy</a>
     <a href="mailto:contact@nexuslabio.tech" class="footer-link">contact@nexuslabio.tech</a>
   </div>
 </footer>
@@ -1261,6 +1314,14 @@
     });
   }
 </script>
+
+<!-- WhatsApp Float Button -->
+<a href="https://wa.me/+923XXXXXXXXX" target="_blank" class="whatsapp-float" aria-label="Chat on WhatsApp">
+  <span class="whatsapp-tooltip">Chat on WhatsApp</span>
+  <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+    <path d="M16 0C7.164 0 0 7.163 0 16c0 2.825.747 5.478 2.051 7.788L.051 31.171l7.574-1.985A15.927 15.927 0 0016 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm0 29.333c-2.548 0-4.947-.714-6.982-1.95l-.501-.298-5.186 1.36 1.384-5.062-.326-.518A13.265 13.265 0 012.667 16c0-7.364 5.97-13.333 13.333-13.333S29.333 8.636 29.333 16 23.364 29.333 16 29.333zm7.293-9.955c-.4-.2-2.366-1.167-2.733-1.3-.367-.134-.634-.2-.9.2-.267.4-1.034 1.3-1.267 1.567-.233.267-.467.3-.867.1-.4-.2-1.688-.623-3.216-1.986-1.188-1.06-1.99-2.368-2.224-2.768-.233-.4-.025-.617.175-.816.18-.179.4-.467.6-.7.2-.233.267-.4.4-.667.133-.267.067-.5-.033-.7-.1-.2-.9-2.167-1.234-2.968-.333-.8-.667-.667-.9-.667-.233 0-.5-.033-.767-.033-.267 0-.7.1-1.067.5-.367.4-1.4 1.367-1.4 3.334s1.433 3.867 1.633 4.134c.2.267 2.8 4.267 6.783 5.983.95.41 1.692.655 2.27.839.953.303 1.82.26 2.506.158.765-.115 2.367-.968 2.7-1.902.333-.935.333-1.735.233-1.902-.1-.167-.367-.267-.767-.467z"/>
+  </svg>
+</a>
 
 </body>
 </html>
