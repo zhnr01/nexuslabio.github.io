@@ -318,6 +318,133 @@
     line-height: 1.75;
   }
 
+  /* RESULTS */
+  .results {
+    background: var(--ink);
+  }
+
+  .results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+
+  .result-card {
+    background: var(--slate-800);
+    padding: 2rem;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.06);
+    transition: transform 0.2s, border-color 0.2s;
+  }
+
+  .result-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(109, 40, 217, 0.3);
+  }
+
+  .result-metric {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--emerald);
+    display: block;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.02em;
+  }
+
+  .result-label {
+    font-size: 0.95rem;
+    color: var(--white);
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+    display: block;
+  }
+
+  .result-description {
+    font-size: 0.875rem;
+    color: var(--slate-400);
+    line-height: 1.6;
+  }
+
+  /* TESTIMONIALS */
+  .testimonials {
+    background: var(--slate-800);
+  }
+
+  .testimonials-header {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto 4rem;
+  }
+
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+  }
+
+  .testimonial-card {
+    background: var(--slate-700);
+    padding: 2rem;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.06);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .testimonial-stars {
+    color: #FFBD2E;
+    font-size: 1.25rem;
+    letter-spacing: 0.2rem;
+  }
+
+  .testimonial-text {
+    font-size: 1rem;
+    color: var(--white);
+    line-height: 1.7;
+    flex-grow: 1;
+  }
+
+  .testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .testimonial-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--violet);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.125rem;
+    color: var(--white);
+  }
+
+  .testimonial-details {
+    flex-grow: 1;
+  }
+
+  .testimonial-name {
+    font-weight: 600;
+    color: var(--white);
+    font-size: 0.95rem;
+  }
+
+  .testimonial-role {
+    font-size: 0.85rem;
+    color: var(--slate-400);
+    margin-top: 0.15rem;
+  }
+
   /* SERVICES */
   .services {
     background: var(--slate-800);
@@ -670,6 +797,8 @@
     .process-step { padding: 1.5rem; }
     .nav-links { display: none; }
     .nav-mobile-toggle { display: block; }
+    .results-grid { grid-template-columns: 1fr; }
+    .testimonials-grid { grid-template-columns: 1fr; }
   }
 
   @media (max-width: 600px) {
@@ -677,6 +806,8 @@
     .process-steps { grid-template-columns: 1fr; }
     .hero-stats { gap: 2rem; }
     footer { flex-direction: column; text-align: center; }
+    .results-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+    .testimonials-grid { grid-template-columns: 1fr; gap: 1.5rem; }
   }
 </style>
 </head>
@@ -768,6 +899,81 @@
         <li>Workflow automation</li>
         <li>Clean, maintainable code</li>
       </ul>
+    </div>
+  </div>
+</section>
+
+<!-- RESULTS -->
+<section class="results">
+  <div style="text-align: center; max-width: 700px; margin: 0 auto;">
+    <p class="section-label">Proven Results</p>
+    <h2 class="section-title">Real projects.<br>Real impact.</h2>
+    <p class="section-sub" style="margin: 0 auto;">Numbers from actual client projects. No inflated metrics, no hypotheticals.</p>
+  </div>
+  <div class="results-grid">
+    <div class="result-card">
+      <span class="result-metric">2,400+</span>
+      <span class="result-label">Real Estate Leads Delivered</span>
+      <p class="result-description">Scraped and verified investor-ready property listings across 12 markets in 48 hours.</p>
+    </div>
+    <div class="result-card">
+      <span class="result-metric">94%</span>
+      <span class="result-label">Data Accuracy Rate</span>
+      <p class="result-description">Email verification, phone validation, and duplicate removal on every list we deliver.</p>
+    </div>
+    <div class="result-card">
+      <span class="result-metric">< 24hr</span>
+      <span class="result-label">Average Delivery Time</span>
+      <p class="result-description">From brief to clean CSV in your inbox. Most projects complete same-day.</p>
+    </div>
+    <div class="result-card">
+      <span class="result-metric">15+</span>
+      <span class="result-label">Industries Served</span>
+      <p class="result-description">SaaS, real estate, e-commerce, agencies, consulting, healthcare, and more.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="testimonials-header">
+    <p class="section-label">Client Feedback</p>
+    <h2 class="section-title">What clients say</h2>
+    <p class="section-sub" style="margin: 0 auto;">Real feedback from real projects.</p>
+  </div>
+  <div class="testimonials-grid">
+    <div class="testimonial-card">
+      <div class="testimonial-stars">★★★★★</div>
+      <p class="testimonial-text">"Needed 500 verified dentist leads in NYC. Got 487 records in 23 hours with phone, email, and Google ratings. Clean data, zero fluff. Exactly what was promised."</p>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar">MK</div>
+        <div class="testimonial-details">
+          <div class="testimonial-name">Michael K.</div>
+          <div class="testimonial-role">Marketing Director, Healthcare SaaS</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div class="testimonial-stars">★★★★★</div>
+      <p class="testimonial-text">"Built us a custom dashboard to monitor competitor pricing across 200+ products. Updates every 6 hours. Game-changer for our pricing strategy."</p>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar">SP</div>
+        <div class="testimonial-details">
+          <div class="testimonial-name">Sarah P.</div>
+          <div class="testimonial-role">Founder, E-commerce Brand</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div class="testimonial-stars">★★★★★</div>
+      <p class="testimonial-text">"No back-and-forth. No scope creep. Just a clean lead list delivered when promised. Refreshing to work with someone who just executes."</p>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar">DJ</div>
+        <div class="testimonial-details">
+          <div class="testimonial-name">David J.</div>
+          <div class="testimonial-role">Growth Lead, B2B Agency</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
