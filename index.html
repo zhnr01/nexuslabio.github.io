@@ -1,9 +1,900 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>NexusLab</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NexusLab — Build. Scrape. Scale.</title>
+<meta name="description" content="Data intelligence and custom software for businesses that run on real information. Web scraping, lead generation, and full-stack development.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink:       #0F172A;
+    --violet:    #6D28D9;
+    --violet-lt: #7C3AED;
+    --emerald:   #10B981;
+    --white:     #F8FAFC;
+    --slate-200: #E2E8F0;
+    --slate-400: #94A3B8;
+    --slate-700: #334155;
+    --slate-800: #1E293B;
+    --font-display: 'Space Grotesk', sans-serif;
+    --font-body:    'Inter', sans-serif;
+    --font-mono:    'JetBrains Mono', monospace;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--ink);
+    color: var(--white);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 5%;
+    background: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+  }
+
+  .nav-logo img {
+    height: 36px;
+    width: auto;
+  }
+
+  .nav-wordmark {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: -0.02em;
+  }
+
+  .nav-wordmark span { color: var(--violet-lt); }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 0.9rem;
+    color: var(--slate-400);
+    text-decoration: none;
+    transition: color 0.2s;
+    font-weight: 500;
+  }
+
+  .nav-links a:hover { color: var(--white); }
+
+  .nav-cta {
+    background: var(--violet) !important;
+    color: var(--white) !important;
+    padding: 0.5rem 1.25rem;
+    border-radius: 6px;
+    font-weight: 600 !important;
+    font-size: 0.875rem !important;
+    transition: background 0.2s !important;
+  }
+
+  .nav-cta:hover { background: var(--violet-lt) !important; }
+
+  .nav-mobile-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.25rem;
+  }
+
+  .nav-mobile-toggle span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--white);
+    margin: 5px 0;
+    transition: all 0.3s;
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 8rem 5% 5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 70% 50%, rgba(109, 40, 217, 0.12) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 20% 80%, rgba(16, 185, 129, 0.06) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+  }
+
+  .hero-content {
+    position: relative;
+    max-width: 760px;
+  }
+
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--emerald);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 1.75rem;
+    padding: 0.4rem 0.9rem;
+    border: 1px solid rgba(16, 185, 129, 0.25);
+    border-radius: 100px;
+    background: rgba(16, 185, 129, 0.06);
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background: var(--emerald);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.75rem, 6vw, 4.5rem);
+    font-weight: 700;
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+    margin-bottom: 1.5rem;
+    color: var(--white);
+  }
+
+  .hero h1 em {
+    font-style: normal;
+    color: var(--violet-lt);
+  }
+
+  .hero-sub {
+    font-size: 1.15rem;
+    color: var(--slate-400);
+    max-width: 560px;
+    margin-bottom: 2.5rem;
+    line-height: 1.75;
+  }
+
+  .hero-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--violet);
+    color: var(--white);
+    padding: 0.875rem 1.75rem;
+    border-radius: 8px;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .btn-primary:hover {
+    background: var(--violet-lt);
+    transform: translateY(-1px);
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--slate-400);
+    padding: 0.875rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    text-decoration: none;
+    border: 1px solid rgba(255,255,255,0.1);
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .btn-secondary:hover {
+    color: var(--white);
+    border-color: rgba(255,255,255,0.25);
+  }
+
+  .hero-stats {
+    margin-top: 4rem;
+    display: flex;
+    gap: 3rem;
+    flex-wrap: wrap;
+  }
+
+  .hero-stat-value {
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--white);
+    display: block;
+    letter-spacing: -0.02em;
+  }
+
+  .hero-stat-label {
+    font-size: 0.8rem;
+    color: var(--slate-400);
+    font-family: var(--font-mono);
+    letter-spacing: 0.05em;
+  }
+
+  /* SECTION BASE */
+  section {
+    padding: 6rem 5%;
+  }
+
+  .section-label {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--violet-lt);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+    color: var(--white);
+    margin-bottom: 1rem;
+  }
+
+  .section-sub {
+    font-size: 1.05rem;
+    color: var(--slate-400);
+    max-width: 540px;
+    line-height: 1.75;
+  }
+
+  /* SERVICES */
+  .services {
+    background: var(--slate-800);
+  }
+
+  .services-header {
+    max-width: 600px;
+    margin-bottom: 3.5rem;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .service-card {
+    background: var(--slate-800);
+    padding: 2.5rem;
+    position: relative;
+    transition: background 0.2s;
+  }
+
+  .service-card:hover { background: #243347; }
+
+  .service-tag {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.7rem;
+    border-radius: 4px;
+    margin-bottom: 1.5rem;
+  }
+
+  .service-tag.data {
+    color: var(--emerald);
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+  }
+
+  .service-tag.lead {
+    color: var(--emerald);
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+  }
+
+  .service-tag.dev {
+    color: var(--violet-lt);
+    background: rgba(124, 58, 237, 0.1);
+    border: 1px solid rgba(124, 58, 237, 0.2);
+  }
+
+  .service-card h3 {
+    font-family: var(--font-display);
+    font-size: 1.375rem;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 0.875rem;
+    letter-spacing: -0.02em;
+  }
+
+  .service-card p {
+    color: var(--slate-400);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin-bottom: 1.75rem;
+  }
+
+  .service-features {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .service-features li {
+    font-size: 0.875rem;
+    color: var(--slate-400);
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+  }
+
+  .service-features li::before {
+    content: '';
+    width: 5px;
+    height: 5px;
+    background: var(--emerald);
+    border-radius: 50%;
+    margin-top: 0.55rem;
+    flex-shrink: 0;
+  }
+
+  /* WHY */
+  .why { background: var(--ink); }
+
+  .why-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+
+  .why-points {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-top: 2.5rem;
+  }
+
+  .why-point {
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    gap: 1.25rem;
+    align-items: start;
+  }
+
+  .why-point-num {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--violet-lt);
+    letter-spacing: 0.05em;
+    padding-top: 0.2rem;
+  }
+
+  .why-point h4 {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 0.3rem;
+  }
+
+  .why-point p {
+    font-size: 0.9rem;
+    color: var(--slate-400);
+    line-height: 1.65;
+  }
+
+  .why-visual {
+    background: var(--slate-800);
+    border-radius: 12px;
+    padding: 2rem;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .terminal-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .terminal-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+
+  .terminal-dot:nth-child(1) { background: #FF5F57; }
+  .terminal-dot:nth-child(2) { background: #FFBD2E; }
+  .terminal-dot:nth-child(3) { background: #28CA42; }
+
+  .terminal-code {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    line-height: 1.8;
+    color: var(--slate-400);
+  }
+
+  .terminal-code .t-green { color: var(--emerald); }
+  .terminal-code .t-violet { color: #a78bfa; }
+  .terminal-code .t-white { color: var(--white); }
+  .terminal-code .t-comment { color: #475569; }
+
+  /* PROCESS */
+  .process { background: var(--slate-800); }
+
+  .process-header {
+    max-width: 540px;
+    margin-bottom: 4rem;
+  }
+
+  .process-steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    position: relative;
+  }
+
+  .process-steps::before {
+    content: '';
+    position: absolute;
+    top: 28px;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(109,40,217,0.4), rgba(109,40,217,0.4), transparent);
+  }
+
+  .process-step {
+    padding: 0 1.5rem;
+    position: relative;
+  }
+
+  .step-num {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--slate-800);
+    border: 1px solid rgba(109, 40, 217, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--violet-lt);
+    margin-bottom: 1.5rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .process-step h4 {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 0.5rem;
+  }
+
+  .process-step p {
+    font-size: 0.875rem;
+    color: var(--slate-400);
+    line-height: 1.65;
+  }
+
+  /* CONTACT */
+  .contact {
+    background: var(--ink);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .contact-bg {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 50% 80% at 50% 100%, rgba(109,40,217,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .contact-inner {
+    position: relative;
+    max-width: 640px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .contact-inner .section-label { justify-content: center; display: flex; }
+
+  .contact-inner .section-title { margin-bottom: 1rem; }
+
+  .contact-inner .section-sub {
+    margin: 0 auto 2.5rem;
+    text-align: center;
+  }
+
+  .contact-email {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    color: var(--white);
+    text-decoration: none;
+    padding: 1rem 2rem;
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 8px;
+    transition: border-color 0.2s, background 0.2s;
+    margin-bottom: 1.5rem;
+  }
+
+  .contact-email:hover {
+    border-color: var(--violet);
+    background: rgba(109,40,217,0.08);
+  }
+
+  .contact-email-icon {
+    width: 8px;
+    height: 8px;
+    background: var(--emerald);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--slate-800);
+    padding: 2rem 5%;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .footer-logo {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--white);
+    text-decoration: none;
+  }
+
+  .footer-logo span { color: var(--violet-lt); }
+
+  .footer-tagline {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--slate-400);
+    letter-spacing: 0.05em;
+  }
+
+  .footer-right {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .footer-link {
+    font-size: 0.85rem;
+    color: var(--slate-400);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-link:hover { color: var(--white); }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .why-inner { grid-template-columns: 1fr; }
+    .why-visual { order: -1; }
+    .process-steps { grid-template-columns: 1fr 1fr; }
+    .process-steps::before { display: none; }
+    .process-step { padding: 1.5rem; }
+    .nav-links { display: none; }
+    .nav-mobile-toggle { display: block; }
+  }
+
+  @media (max-width: 600px) {
+    .hero h1 { font-size: 2.25rem; }
+    .process-steps { grid-template-columns: 1fr; }
+    .hero-stats { gap: 2rem; }
+    footer { flex-direction: column; text-align: center; }
+  }
+</style>
 </head>
 <body>
-  <h1>Coming Soon</h1>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <img src="nexuslab-logo-mark.png" alt="NexusLab">
+    <span class="nav-wordmark">Nexus<span>Lab</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#why">Why us</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#contact" class="nav-cta">Get in touch</a></li>
+  </ul>
+  <button class="nav-mobile-toggle" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Data intelligence &amp; software development</div>
+    <h1>Your competitors are<br>running on <em>real data.</em><br>Are you?</h1>
+    <p class="hero-sub">NexusLab builds data pipelines and custom software for businesses that can't afford to guess. We scrape, structure, and deliver — then build the tools to act on it.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Start a project →</a>
+      <a href="#services" class="btn-secondary">See what we do</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <span class="hero-stat-value">24hr</span>
+        <span class="hero-stat-label">Lead list delivery</span>
+      </div>
+      <div>
+        <span class="hero-stat-value">500+</span>
+        <span class="hero-stat-label">Verified leads per run</span>
+      </div>
+      <div>
+        <span class="hero-stat-value">3</span>
+        <span class="hero-stat-label">Core service pillars</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="services-header">
+    <p class="section-label">What we do</p>
+    <h2 class="section-title">Three services.<br>One vendor.</h2>
+    <p class="section-sub">Most agencies do data or development. We do both — which means you go from raw data to working software without switching vendors.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <span class="service-tag data">Data Intelligence</span>
+      <h3>Web Scraping &amp; Data Extraction</h3>
+      <p>Tell us what data you need and where it lives. We build the pipeline and deliver clean, structured data on your schedule.</p>
+      <ul class="service-features">
+        <li>Any website, any niche</li>
+        <li>CSV, JSON, Google Sheets, or direct API</li>
+        <li>Scheduled runs and automated delivery</li>
+        <li>Clean, validated output every time</li>
+      </ul>
+    </div>
+    <div class="service-card">
+      <span class="service-tag lead">Lead Generation</span>
+      <h3>Verified Lead Lists</h3>
+      <p>Freshly scraped, verified contact lists for your exact target market. No recycled databases — every list is built for your brief.</p>
+      <ul class="service-features">
+        <li>500+ verified records per list</li>
+        <li>24-hour delivery</li>
+        <li>Google Maps, LinkedIn, directories</li>
+        <li>Any industry, any location</li>
+      </ul>
+    </div>
+    <div class="service-card">
+      <span class="service-tag dev">Software Development</span>
+      <h3>Custom Software &amp; Web Apps</h3>
+      <p>From idea to deployed application. We build web apps, dashboards, and automation tools — without the 6-week agency timeline.</p>
+      <ul class="service-features">
+        <li>Full-stack web applications</li>
+        <li>Data dashboards and reporting tools</li>
+        <li>Workflow automation</li>
+        <li>Clean, maintainable code</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="why" id="why">
+  <div class="why-inner">
+    <div>
+      <p class="section-label">Why NexusLab</p>
+      <h2 class="section-title">Built different<br>by design.</h2>
+      <div class="why-points">
+        <div class="why-point">
+          <span class="why-point-num">01</span>
+          <div>
+            <h4>End-to-end ownership</h4>
+            <p>We handle data and development under one roof. No handoffs, no coordination overhead, no blame-shifting between vendors.</p>
+          </div>
+        </div>
+        <div class="why-point">
+          <span class="why-point-num">02</span>
+          <div>
+            <h4>Startup speed, not agency timelines</h4>
+            <p>Lead lists in 24 hours. MVP scopes in days, not weeks. We move fast because slow delivery isn't delivery.</p>
+          </div>
+        </div>
+        <div class="why-point">
+          <span class="why-point-num">03</span>
+          <div>
+            <h4>You talk to the builder</h4>
+            <p>No account managers. No project coordinators. You work directly with the person writing the code and running the scrapers.</p>
+          </div>
+        </div>
+        <div class="why-point">
+          <span class="why-point-num">04</span>
+          <div>
+            <h4>Clean output, every time</h4>
+            <p>Validated data, readable code, clear documentation. We don't ship work we'd be embarrassed to put our name on.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="why-visual">
+      <div class="terminal-bar">
+        <div class="terminal-dot"></div>
+        <div class="terminal-dot"></div>
+        <div class="terminal-dot"></div>
+      </div>
+      <div class="terminal-code">
+        <div><span class="t-comment"># Lead list — Google Maps / Dentists / NYC</span></div>
+        <div><span class="t-green">scraper</span><span class="t-white">.run(</span></div>
+        <div>&nbsp;&nbsp;<span class="t-violet">target</span><span class="t-white">  = </span><span class="t-green">"google_maps"</span><span class="t-white">,</span></div>
+        <div>&nbsp;&nbsp;<span class="t-violet">niche</span><span class="t-white">   = </span><span class="t-green">"dentists"</span><span class="t-white">,</span></div>
+        <div>&nbsp;&nbsp;<span class="t-violet">location</span><span class="t-white">= </span><span class="t-green">"New York, NY"</span><span class="t-white">,</span></div>
+        <div>&nbsp;&nbsp;<span class="t-violet">output</span><span class="t-white">  = </span><span class="t-green">"csv"</span></div>
+        <div><span class="t-white">)</span></div>
+        <br>
+        <div><span class="t-comment"># ✓ 487 records — verified</span></div>
+        <div><span class="t-comment"># ✓ name, phone, email, address</span></div>
+        <div><span class="t-comment"># ✓ delivered in 23 minutes</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process" id="process">
+  <div class="process-header">
+    <p class="section-label">How it works</p>
+    <h2 class="section-title">Simple process.<br>No surprises.</h2>
+  </div>
+  <div class="process-steps">
+    <div class="process-step">
+      <div class="step-num">01</div>
+      <h4>You brief us</h4>
+      <p>Tell us what you need — data, software, or both. One email or call is enough to get started.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-num">02</div>
+      <h4>We scope it</h4>
+      <p>Clear deliverables, timeline, and price. No vague estimates. You know exactly what you're getting before we start.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-num">03</div>
+      <h4>We build it</h4>
+      <p>We get to work. You get updates, not silence. If anything changes, you hear it from us first.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-num">04</div>
+      <h4>You get it</h4>
+      <p>Clean deliverable, on time, ready to use. Exactly what was agreed. Nothing more, nothing less.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-bg"></div>
+  <div class="contact-inner">
+    <p class="section-label">Get in touch</p>
+    <h2 class="section-title">Ready to get<br>the data you need?</h2>
+    <p class="section-sub">Tell us what you're working on. We'll tell you what we can do and what it costs. No pitch decks, no discovery calls that go nowhere.</p>
+    <br>
+    <a href="mailto:contact@nexuslabio.tech" class="contact-email">
+      <span class="contact-email-icon"></span>
+      contact@nexuslabio.tech
+    </a>
+    <br><br>
+    <a href="mailto:contact@nexuslabio.tech" class="btn-primary">Send us a message →</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <a href="#" class="footer-logo">Nexus<span>Lab</span></a>
+    <p class="footer-tagline" style="margin-top: 0.4rem;">Build. Scrape. Scale.</p>
+  </div>
+  <div class="footer-right">
+    <a href="#services" class="footer-link">Services</a>
+    <a href="#process" class="footer-link">Process</a>
+    <a href="mailto:contact@nexuslabio.tech" class="footer-link">contact@nexuslabio.tech</a>
+  </div>
+</footer>
+
+<script>
+  const toggle = document.querySelector('.nav-mobile-toggle');
+  const links = document.querySelector('.nav-links');
+  toggle.addEventListener('click', () => {
+    links.style.display = links.style.display === 'flex' ? 'none' : 'flex';
+    links.style.flexDirection = 'column';
+    links.style.position = 'absolute';
+    links.style.top = '70px';
+    links.style.left = '0';
+    links.style.right = '0';
+    links.style.background = '#0F172A';
+    links.style.padding = '1.5rem 5%';
+    links.style.borderBottom = '1px solid rgba(255,255,255,0.06)';
+  });
+</script>
+
 </body>
 </html>
