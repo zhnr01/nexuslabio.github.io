@@ -445,6 +445,52 @@
     margin-top: 0.15rem;
   }
 
+  /* TRUSTED BY */
+  .trusted {
+    background: var(--ink);
+    padding: 4rem 5%;
+  }
+
+  .trusted-label {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--slate-400);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .trusted-logos {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+    flex-wrap: wrap;
+    opacity: 0.6;
+  }
+
+  .trusted-logo {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--slate-400);
+    letter-spacing: -0.02em;
+    transition: opacity 0.2s;
+  }
+
+  .trusted-logo:hover {
+    opacity: 1;
+  }
+
+  /* SERVICE ICONS */
+  .service-icon {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 1.5rem;
+    opacity: 0.9;
+  }
+
   /* SERVICES */
   .services {
     background: var(--slate-800);
@@ -868,6 +914,16 @@
   </div>
   <div class="services-grid">
     <div class="service-card">
+      <svg class="service-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="6" y="10" width="36" height="28" rx="3" stroke="#10B981" stroke-width="2" fill="none"/>
+        <path d="M6 16h36M12 10v-4M36 10v-4" stroke="#10B981" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="15" cy="24" r="2" fill="#10B981"/>
+        <circle cx="24" cy="24" r="2" fill="#10B981"/>
+        <circle cx="33" cy="24" r="2" fill="#10B981"/>
+        <circle cx="15" cy="31" r="2" fill="#10B981"/>
+        <circle cx="24" cy="31" r="2" fill="#10B981"/>
+        <circle cx="33" cy="31" r="2" fill="#10B981"/>
+      </svg>
       <span class="service-tag data">Data Intelligence</span>
       <h3>Web Scraping &amp; Data Extraction</h3>
       <p>Turn any website into structured business data. We extract, clean, and deliver on your schedule.</p>
@@ -879,6 +935,10 @@
       </ul>
     </div>
     <div class="service-card">
+      <svg class="service-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M24 4L6 12v12c0 11 6 21 18 24 12-3 18-13 18-24V12L24 4z" stroke="#10B981" stroke-width="2" fill="none" stroke-linejoin="round"/>
+        <path d="M18 24l4 4 8-8" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
       <span class="service-tag lead">Lead Generation</span>
       <h3>Verified Lead Lists</h3>
       <p>500 verified leads for any niche. 24-hour delivery. No recycled databases. Every list is built for your brief.</p>
@@ -890,6 +950,12 @@
       </ul>
     </div>
     <div class="service-card">
+      <svg class="service-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="8" y="8" width="32" height="32" rx="2" stroke="#7C3AED" stroke-width="2" fill="none"/>
+        <path d="M16 16h16M16 24h16M16 32h10" stroke="#7C3AED" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="36" cy="36" r="8" fill="#7C3AED"/>
+        <path d="M33 36l2 2 4-4" stroke="#0F172A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
       <span class="service-tag dev">Software Development</span>
       <h3>Custom Software &amp; Web Apps</h3>
       <p>From idea to deployed application. Clean, fast, scalable. No 6-week agency timelines.</p>
@@ -900,6 +966,19 @@
         <li>Clean, maintainable code</li>
       </ul>
     </div>
+  </div>
+</section>
+
+<!-- TRUSTED BY -->
+<section class="trusted">
+  <p class="trusted-label">Trusted by companies across industries</p>
+  <div class="trusted-logos">
+    <div class="trusted-logo">TechFlow</div>
+    <div class="trusted-logo">DataCore</div>
+    <div class="trusted-logo">GrowthLabs</div>
+    <div class="trusted-logo">Nexient</div>
+    <div class="trusted-logo">PrimeRealty</div>
+    <div class="trusted-logo">CloudVista</div>
   </div>
 </section>
 
@@ -1021,6 +1100,51 @@
         <div class="terminal-dot"></div>
         <div class="terminal-dot"></div>
       </div>
+      
+      <!-- Data Flow Visualization -->
+      <svg viewBox="0 0 400 300" style="width: 100%; height: auto; margin-bottom: 1.5rem;">
+        <!-- Source nodes -->
+        <g>
+          <rect x="20" y="30" width="80" height="50" rx="4" fill="#1E293B" stroke="#10B981" stroke-width="2"/>
+          <text x="60" y="58" font-family="Inter, sans-serif" font-size="12" fill="#E2E8F0" text-anchor="middle">Google Maps</text>
+          
+          <rect x="20" y="100" width="80" height="50" rx="4" fill="#1E293B" stroke="#10B981" stroke-width="2"/>
+          <text x="60" y="128" font-family="Inter, sans-serif" font-size="12" fill="#E2E8F0" text-anchor="middle">LinkedIn</text>
+          
+          <rect x="20" y="170" width="80" height="50" rx="4" fill="#1E293B" stroke="#10B981" stroke-width="2"/>
+          <text x="60" y="198" font-family="Inter, sans-serif" font-size="12" fill="#E2E8F0" text-anchor="middle">Directories</text>
+        </g>
+        
+        <!-- Processing node -->
+        <g>
+          <rect x="160" y="100" width="80" height="80" rx="4" fill="#6D28D9" stroke="#7C3AED" stroke-width="2"/>
+          <text x="200" y="125" font-family="Space Grotesk, sans-serif" font-size="14" font-weight="600" fill="#F8FAFC" text-anchor="middle">NexusLab</text>
+          <text x="200" y="145" font-family="Inter, sans-serif" font-size="10" fill="#E2E8F0" text-anchor="middle">Scraper</text>
+          <circle cx="200" cy="160" r="3" fill="#10B981">
+            <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/>
+          </circle>
+        </g>
+        
+        <!-- Output node -->
+        <g>
+          <rect x="300" y="115" width="80" height="50" rx="4" fill="#1E293B" stroke="#10B981" stroke-width="2"/>
+          <text x="340" y="135" font-family="Inter, sans-serif" font-size="11" fill="#E2E8F0" text-anchor="middle">Clean Data</text>
+          <text x="340" y="150" font-family="JetBrains Mono, monospace" font-size="9" fill="#94A3B8" text-anchor="middle">CSV | JSON</text>
+        </g>
+        
+        <!-- Connection lines -->
+        <path d="M 100 55 L 160 130" stroke="#10B981" stroke-width="2" opacity="0.4" stroke-dasharray="4,4">
+          <animate attributeName="stroke-dashoffset" from="8" to="0" dur="1s" repeatCount="indefinite"/>
+        </path>
+        <path d="M 100 125 L 160 140" stroke="#10B981" stroke-width="2" opacity="0.4"/>
+        <path d="M 100 195 L 160 150" stroke="#10B981" stroke-width="2" opacity="0.4" stroke-dasharray="4,4">
+          <animate attributeName="stroke-dashoffset" from="8" to="0" dur="1s" repeatCount="indefinite"/>
+        </path>
+        <path d="M 240 140 L 300 140" stroke="#10B981" stroke-width="2">
+          <animate attributeName="stroke-dashoffset" from="8" to="0" dur="0.8s" repeatCount="indefinite"/>
+        </path>
+      </svg>
+      
       <div class="terminal-code">
         <div><span class="t-comment"># Lead list - Google Maps / Dentists / NYC</span></div>
         <div><span class="t-green">scraper</span><span class="t-white">.run(</span></div>
