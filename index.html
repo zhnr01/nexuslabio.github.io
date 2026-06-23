@@ -5,6 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NexusLab — Build. Scrape. Scale.</title>
 <meta name="description" content="Data intelligence and custom software for businesses that run on real information. Web scraping, lead generation, and full-stack development.">
+<link rel="icon" type="image/png" href="./nexuslab-logo-mark.png">
+<meta property="og:title" content="NexusLab — Build. Scrape. Scale.">
+<meta property="og:description" content="Data intelligence and custom software for businesses that run on real information.">
+<meta property="og:image" content="./nexuslab-twitter-banner.png">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="./nexuslab-twitter-banner.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
@@ -124,6 +131,7 @@
     min-height: 100vh;
     display: flex;
     align-items: center;
+    justify-content: center;
     padding: 8rem 5% 5rem;
     position: relative;
     overflow: hidden;
@@ -133,8 +141,8 @@
     position: absolute;
     inset: 0;
     background:
-      radial-gradient(ellipse 60% 50% at 70% 50%, rgba(109, 40, 217, 0.12) 0%, transparent 70%),
-      radial-gradient(ellipse 40% 40% at 20% 80%, rgba(16, 185, 129, 0.06) 0%, transparent 60%);
+      radial-gradient(ellipse 60% 50% at 50% 50%, rgba(109, 40, 217, 0.12) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 30% 80%, rgba(16, 185, 129, 0.06) 0%, transparent 60%);
     pointer-events: none;
   }
 
@@ -150,7 +158,9 @@
 
   .hero-content {
     position: relative;
-    max-width: 760px;
+    max-width: 900px;
+    width: 100%;
+    text-align: center;
   }
 
   .hero-eyebrow {
@@ -201,14 +211,15 @@
   .hero-sub {
     font-size: 1.15rem;
     color: var(--slate-400);
-    max-width: 560px;
-    margin-bottom: 2.5rem;
+    max-width: 660px;
+    margin: 0 auto 2.5rem;
     line-height: 1.75;
   }
 
   .hero-actions {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 1rem;
     flex-wrap: wrap;
   }
@@ -255,6 +266,7 @@
   .hero-stats {
     margin-top: 4rem;
     display: flex;
+    justify-content: center;
     gap: 3rem;
     flex-wrap: wrap;
   }
@@ -673,7 +685,7 @@
 <!-- NAV -->
 <nav>
   <a href="#" class="nav-logo">
-    <img src="nexuslab-logo-mark.png" alt="NexusLab">
+    <img src="./nexuslab-logo-mark.png" alt="NexusLab logo" onerror="console.error('Logo failed to load:', this.src)">
     <span class="nav-wordmark">Nexus<span>Lab</span></span>
   </a>
   <ul class="nav-links">
@@ -682,7 +694,7 @@
     <li><a href="#process">Process</a></li>
     <li><a href="#contact" class="nav-cta">Get in touch</a></li>
   </ul>
-  <button class="nav-mobile-toggle" aria-label="Menu">
+  <button class="nav-mobile-toggle" aria-label="Menu" aria-expanded="false">
     <span></span><span></span><span></span>
   </button>
 </nav>
@@ -883,17 +895,41 @@
 <script>
   const toggle = document.querySelector('.nav-mobile-toggle');
   const links = document.querySelector('.nav-links');
-  toggle.addEventListener('click', () => {
-    links.style.display = links.style.display === 'flex' ? 'none' : 'flex';
-    links.style.flexDirection = 'column';
-    links.style.position = 'absolute';
-    links.style.top = '70px';
-    links.style.left = '0';
-    links.style.right = '0';
-    links.style.background = '#0F172A';
-    links.style.padding = '1.5rem 5%';
-    links.style.borderBottom = '1px solid rgba(255,255,255,0.06)';
-  });
+  
+  if (toggle && links) {
+    toggle.addEventListener('click', () => {
+      const isOpen = links.style.display === 'flex';
+      
+      if (isOpen) {
+        links.style.display = 'none';
+      } else {
+        links.style.display = 'flex';
+        links.style.flexDirection = 'column';
+        links.style.position = 'absolute';
+        links.style.top = '70px';
+        links.style.left = '0';
+        links.style.right = '0';
+        links.style.background = '#0F172A';
+        links.style.padding = '1.5rem 5%';
+        links.style.borderBottom = '1px solid rgba(255,255,255,0.06)';
+        links.style.gap = '1rem';
+      }
+      
+      // Toggle aria-expanded for accessibility
+      toggle.setAttribute('aria-expanded', !isOpen);
+    });
+    
+    // Close menu when clicking a link
+    const navLinks = links.querySelectorAll('a');
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        if (window.innerWidth <= 900) {
+          links.style.display = 'none';
+          toggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+    });
+  }
 </script>
 
 </body>
