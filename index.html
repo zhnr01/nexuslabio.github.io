@@ -84,9 +84,11 @@
   }
   .hero-grid {
     position: absolute; inset: 0;
-    background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-                      linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-    background-size: 60px 60px; pointer-events: none;
+    pointer-events: none;
+  }
+  #heroCanvas {
+    width: 100%; height: 100%;
+    position: absolute; inset: 0;
   }
   .hero-content { position: relative; max-width: 900px; width: 100%; text-align: center; }
   .hero-eyebrow {
@@ -320,7 +322,9 @@
 <!-- HERO -->
 <section class="hero">
   <div class="hero-bg"></div>
-  <div class="hero-grid"></div>
+  <div class="hero-grid">
+    <canvas id="heroCanvas"></canvas>
+  </div>
   <div class="hero-content">
     <div class="hero-eyebrow">Data Intelligence &amp; Software Development</div>
     <h1>Your competitors are<br>running on <em>real data.</em><br>Are you?</h1>
@@ -751,6 +755,87 @@
 </a>
 
 <script>
+// Interactive Hero Grid
+(function() {
+  const canvas = document.getElementById('heroCanvas');
+  if (!canvas) return;
+  
+  const ctx = canvas.getContext('2d');
+  const hero = document.querySelector('.hero');
+  let mouseX = -1000, mouseY = -1000;
+  let targetMouseX = -1000, targetMouseY = -1000;
+  
+  function resize() {
+    canvas.width = hero.offsetWidth;
+    canvas.height = hero.offsetHeight;
+  }
+  
+  resize();
+  window.addEventListener('resize', resize);
+  
+  hero.addEventListener('mousemove', (e) => {
+    const rect = hero.getBoundingClientRect();
+    targetMouseX = e.clientX - rect.left;
+    targetMouseY = e.clientY - rect.top;
+  });
+  
+  hero.addEventListener('mouseleave', () => {
+    targetMouseX = -1000;
+    targetMouseY = -1000;
+  });
+  
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    // Smooth mouse movement
+    mouseX += (targetMouseX - mouseX) * 0.1;
+    mouseY += (targetMouseY - mouseY) * 0.1;
+    
+    const gridSize = 60;
+    const glowRadius = 200;
+    
+    // Draw vertical lines
+    for (let x = 0; x < canvas.width; x += gridSize) {
+      const distX = Math.abs(x - mouseX);
+      const distFromMouse = Math.sqrt(distX * distX + Math.pow(Math.min(Math.abs(mouseY), Math.abs(canvas.height - mouseY)), 2));
+      const intensity = Math.max(0, 1 - distFromMouse / glowRadius);
+      
+      const baseAlpha = 0.03;
+      const glowAlpha = intensity * 0.4;
+      const alpha = baseAlpha + glowAlpha;
+      
+      ctx.strokeStyle = `rgba(124, 58, 237, ${alpha})`;
+      ctx.lineWidth = 1 + intensity * 1.5;
+      ctx.beginPath();
+      ctx.moveTo(x, 0);
+      ctx.lineTo(x, canvas.height);
+      ctx.stroke();
+    }
+    
+    // Draw horizontal lines
+    for (let y = 0; y < canvas.height; y += gridSize) {
+      const distY = Math.abs(y - mouseY);
+      const distFromMouse = Math.sqrt(distY * distY + Math.pow(Math.min(Math.abs(mouseX), Math.abs(canvas.width - mouseX)), 2));
+      const intensity = Math.max(0, 1 - distFromMouse / glowRadius);
+      
+      const baseAlpha = 0.03;
+      const glowAlpha = intensity * 0.4;
+      const alpha = baseAlpha + glowAlpha;
+      
+      ctx.strokeStyle = `rgba(124, 58, 237, ${alpha})`;
+      ctx.lineWidth = 1 + intensity * 1.5;
+      ctx.beginPath();
+      ctx.moveTo(0, y);
+      ctx.lineTo(canvas.width, y);
+      ctx.stroke();
+    }
+    
+    requestAnimationFrame(draw);
+  }
+  
+  draw();
+})();
+
 // Mobile nav
 const toggle = document.querySelector('.nav-mobile-toggle');
 const links  = document.querySelector('.nav-links');
