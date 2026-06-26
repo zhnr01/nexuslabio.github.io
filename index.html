@@ -791,8 +791,8 @@
     mouseX += (targetMouseX - mouseX) * 0.15;
     mouseY += (targetMouseY - mouseY) * 0.15;
     
-    const gridSize = 60;
-    const spotlightRadius = 250;
+    const gridSize = 30; // Smaller grid boxes (was 60)
+    const spotlightRadius = 120; // Smaller spotlight (was 250)
     
     // Draw vertical lines
     for (let x = 0; x < canvas.width; x += gridSize) {
@@ -866,8 +866,8 @@
     // Draw spotlight circle glow
     if (mouseX > 0 && mouseY > 0) {
       const gradient = ctx.createRadialGradient(mouseX, mouseY, 0, mouseX, mouseY, spotlightRadius);
-      gradient.addColorStop(0, 'rgba(124, 58, 237, 0.12)');
-      gradient.addColorStop(0.3, 'rgba(124, 58, 237, 0.06)');
+      gradient.addColorStop(0, 'rgba(124, 58, 237, 0.08)');
+      gradient.addColorStop(0.4, 'rgba(124, 58, 237, 0.04)');
       gradient.addColorStop(1, 'rgba(124, 58, 237, 0)');
       
       ctx.fillStyle = gradient;
