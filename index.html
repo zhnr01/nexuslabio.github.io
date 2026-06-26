@@ -788,46 +788,90 @@
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     
     // Smooth mouse movement
-    mouseX += (targetMouseX - mouseX) * 0.1;
-    mouseY += (targetMouseY - mouseY) * 0.1;
+    mouseX += (targetMouseX - mouseX) * 0.15;
+    mouseY += (targetMouseY - mouseY) * 0.15;
     
     const gridSize = 60;
-    const glowRadius = 200;
+    const spotlightRadius = 250;
     
     // Draw vertical lines
     for (let x = 0; x < canvas.width; x += gridSize) {
-      const distX = Math.abs(x - mouseX);
-      const distFromMouse = Math.sqrt(distX * distX + Math.pow(Math.min(Math.abs(mouseY), Math.abs(canvas.height - mouseY)), 2));
-      const intensity = Math.max(0, 1 - distFromMouse / glowRadius);
+      const dist = Math.abs(x - mouseX);
+      const intensity = Math.max(0, 1 - dist / spotlightRadius);
       
       const baseAlpha = 0.03;
-      const glowAlpha = intensity * 0.4;
+      const glowAlpha = intensity * 0.6;
       const alpha = baseAlpha + glowAlpha;
       
-      ctx.strokeStyle = `rgba(124, 58, 237, ${alpha})`;
-      ctx.lineWidth = 1 + intensity * 1.5;
+      // Draw base line
+      ctx.strokeStyle = `rgba(255, 255, 255, ${baseAlpha})`;
+      ctx.lineWidth = 1;
       ctx.beginPath();
       ctx.moveTo(x, 0);
       ctx.lineTo(x, canvas.height);
       ctx.stroke();
+      
+      // Draw glow overlay if in spotlight
+      if (intensity > 0) {
+        const gradient = ctx.createLinearGradient(x, mouseY - spotlightRadius, x, mouseY + spotlightRadius);
+        gradient.addColorStop(0, `rgba(124, 58, 237, 0)`);
+        gradient.addColorStop(0.4, `rgba(124, 58, 237, ${glowAlpha * 0.8})`);
+        gradient.addColorStop(0.5, `rgba(124, 58, 237, ${glowAlpha})`);
+        gradient.addColorStop(0.6, `rgba(124, 58, 237, ${glowAlpha * 0.8})`);
+        gradient.addColorStop(1, `rgba(124, 58, 237, 0)`);
+        
+        ctx.strokeStyle = gradient;
+        ctx.lineWidth = 2 + intensity * 2;
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, canvas.height);
+        ctx.stroke();
+      }
     }
     
     // Draw horizontal lines
     for (let y = 0; y < canvas.height; y += gridSize) {
-      const distY = Math.abs(y - mouseY);
-      const distFromMouse = Math.sqrt(distY * distY + Math.pow(Math.min(Math.abs(mouseX), Math.abs(canvas.width - mouseX)), 2));
-      const intensity = Math.max(0, 1 - distFromMouse / glowRadius);
+      const dist = Math.abs(y - mouseY);
+      const intensity = Math.max(0, 1 - dist / spotlightRadius);
       
       const baseAlpha = 0.03;
-      const glowAlpha = intensity * 0.4;
-      const alpha = baseAlpha + glowAlpha;
+      const glowAlpha = intensity * 0.6;
       
-      ctx.strokeStyle = `rgba(124, 58, 237, ${alpha})`;
-      ctx.lineWidth = 1 + intensity * 1.5;
+      // Draw base line
+      ctx.strokeStyle = `rgba(255, 255, 255, ${baseAlpha})`;
+      ctx.lineWidth = 1;
       ctx.beginPath();
       ctx.moveTo(0, y);
       ctx.lineTo(canvas.width, y);
       ctx.stroke();
+      
+      // Draw glow overlay if in spotlight
+      if (intensity > 0) {
+        const gradient = ctx.createLinearGradient(mouseX - spotlightRadius, y, mouseX + spotlightRadius, y);
+        gradient.addColorStop(0, `rgba(124, 58, 237, 0)`);
+        gradient.addColorStop(0.4, `rgba(124, 58, 237, ${glowAlpha * 0.8})`);
+        gradient.addColorStop(0.5, `rgba(124, 58, 237, ${glowAlpha})`);
+        gradient.addColorStop(0.6, `rgba(124, 58, 237, ${glowAlpha * 0.8})`);
+        gradient.addColorStop(1, `rgba(124, 58, 237, 0)`);
+        
+        ctx.strokeStyle = gradient;
+        ctx.lineWidth = 2 + intensity * 2;
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(canvas.width, y);
+        ctx.stroke();
+      }
+    }
+    
+    // Draw spotlight circle glow
+    if (mouseX > 0 && mouseY > 0) {
+      const gradient = ctx.createRadialGradient(mouseX, mouseY, 0, mouseX, mouseY, spotlightRadius);
+      gradient.addColorStop(0, 'rgba(124, 58, 237, 0.12)');
+      gradient.addColorStop(0.3, 'rgba(124, 58, 237, 0.06)');
+      gradient.addColorStop(1, 'rgba(124, 58, 237, 0)');
+      
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
     }
     
     requestAnimationFrame(draw);
